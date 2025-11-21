@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEARE AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="config.js"></script>
+    <script>
+        /*!
+         * Particleground
+         *
+         * @author Jonathan Nicol - @mrjnicol
+         * @version 1.1.0
+         * @description Creates a canvas based particle system background
+         */
+        !function(a,b){"use strict";function c(a){a=a||{};for(var b=1;b<arguments.length;b++){var c=arguments[b];if(c)for(var d in c)c.hasOwnProperty(d)&&("object"==typeof c[d]?deepExtend(a[d],c[d]):a[d]=c[d])}return a}function d(d,g){function h(){if(y){r=b.createElement("canvas"),r.className="pg-canvas",r.style.display="block",d.insertBefore(r,d.firstChild),s=r.getContext("2d"),i();for(var c=Math.round(r.width*r.height/g.density),e=0;c>e;e++){var f=new n;f.setStackPos(e),z.push(f)}a.addEventListener("resize",function(){k()},!1),b.addEventListener("mousemove",function(a){A=a.pageX,B=a.pageY},!1),D&&!C&&a.addEventListener("deviceorientation",function(){F=Math.min(Math.max(-event.beta,-30),30),E=Math.min(Math.max(-event.gamma,-30),30)},!0),j(),q("onInit")}}function i(){r.width=d.offsetWidth,r.height=d.offsetHeight,s.fillStyle=g.dotColor,s.strokeStyle=g.lineColor,s.lineWidth=g.lineWidth}function j(){if(y){u=a.innerWidth,v=a.innerHeight,s.clearRect(0,0,r.width,r.height);for(var b=0;b<z.length;b++)z[b].updatePosition();for(var b=0;b<z.length;b++)z[b].draw();G||(t=requestAnimationFrame(j))}}function k(){i();for(var a=d.offsetWidth,b=d.offsetHeight,c=z.length-1;c>=0;c--)(z[c].position.x>a||z[c].position.y>b)&&z.splice(c,1);var e=Math.round(r.width*r.height/g.density);if(e>z.length)for(;e>z.length;){var f=new n;z.push(f)}else e<z.length&&z.splice(e);for(c=z.length-1;c>=0;c--)z[c].setStackPos(c)}function l(){G=!0}function m(){G=!1,j()}function n(){switch(this.stackPos,this.active=!0,this.layer=Math.ceil(3*Math.random()),this.parallaxOffsetX=0,this.parallaxOffsetY=0,this.position={x:Math.ceil(Math.random()*r.width),y:Math.ceil(Math.random()*r.height)},this.speed={},g.directionX){case"left":this.speed.x=+(-g.maxSpeedX+Math.random()*g.maxSpeedX-g.minSpeedX).toFixed(2);break;case"right":this.speed.x=+(Math.random()*g.maxSpeedX+g.minSpeedX).toFixed(2);break;default:this.speed.x=+(-g.maxSpeedX/2+Math.random()*g.maxSpeedX).toFixed(2),this.speed.x+=this.speed.x>0?g.minSpeedX:-g.minSpeedX}switch(g.directionY){case"up":this.speed.y=+(-g.maxSpeedY+Math.random()*g.maxSpeedY-g.minSpeedY).toFixed(2);break;case"down":this.speed.y=+(Math.random()*g.maxSpeedY+g.minSpeedY).toFixed(2);break;default:this.speed.y=+(-g.maxSpeedY/2+Math.random()*g.maxSpeedY).toFixed(2),this.speed.x+=this.speed.y>0?g.minSpeedY:-g.minSpeedY}}function o(a,b){return b?void(g[a]=b):g[a]}function p(){console.log("destroy"),r.parentNode.removeChild(r),q("onDestroy"),f&&f(d).removeData("plugin_"+e)}function q(a){void 0!==g[a]&&g[a].call(d)}var r,s,t,u,v,w,x,y=!!b.createElement("canvas").getContext,z=[],A=0,B=0,C=!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|BB10|mobi|tablet|opera mini|nexus 7)/i),D=!!a.DeviceOrientationEvent,E=0,F=0,G=!1;return g=c({},a[e].defaults,g),n.prototype.draw=function(){s.beginPath(),s.arc(this.position.x+this.parallaxOffsetX,this.position.y+this.parallaxOffsetY,g.particleRadius/2,0,2*Math.PI,!0),s.closePath(),s.fill(),s.beginPath();for(var a=z.length-1;a>this.stackPos;a--){var b=z[a],c=this.position.x-b.position.x,d=this.position.y-b.position.y,e=Math.sqrt(c*c+d*d).toFixed(2);e<g.proximity&&(s.moveTo(this.position.x+this.parallaxOffsetX,this.position.y+this.parallaxOffsetY),g.curvedLines?s.quadraticCurveTo(Math.max(b.position.x,b.position.x),Math.min(b.position.y,b.position.y),b.position.x+b.parallaxOffsetX,b.position.y+b.parallaxOffsetY):s.lineTo(b.position.x+b.parallaxOffsetX,b.position.y+b.parallaxOffsetY))}s.stroke(),s.closePath()},n.prototype.updatePosition=function(){if(g.parallax){if(D&&!C){var a=(u-0)/60;w=(E- -30)*a+0;var b=(v-0)/60;x=(F- -30)*b+0}else w=A,x=B;this.parallaxTargX=(w-u/2)/(g.parallaxMultiplier*this.layer),this.parallaxOffsetX+=(this.parallaxTargX-this.parallaxOffsetX)/10,this.parallaxTargY=(x-v/2)/(g.parallaxMultiplier*this.layer),this.parallaxOffsetY+=(this.parallaxTargY-this.parallaxOffsetY)/10}var c=d.offsetWidth,e=d.offsetHeight;switch(g.directionX){case"left":this.position.x+this.speed.x+this.parallaxOffsetX<0&&(this.position.x=c-this.parallaxOffsetX);break;case"right":this.position.x+this.speed.x+this.parallaxOffsetX>c&&(this.position.x=0-this.parallaxOffsetX);break;default:(this.position.x+this.speed.x+this.parallaxOffsetX>c||this.position.x+this.speed.x+this.parallaxOffsetX<0)&&(this.speed.x=-this.speed.x)}switch(g.directionY){case"up":this.position.y+this.speed.y+this.parallaxOffsetY<0&&(this.position.y=e-this.parallaxOffsetY);break;case"down":this.position.y+this.speed.y+this.parallaxOffsetY>e&&(this.position.y=0-this.parallaxOffsetY);break;default:(this.position.y+this.speed.y+this.parallaxOffsetY>e||this.position.y+this.speed.y+this.parallaxOffsetY<0)&&(this.speed.y=-this.speed.y)}this.position.x+=this.speed.x,this.position.y+=this.speed.y},n.prototype.setStackPos=function(a){this.stackPos=a},h(),{option:o,destroy:p,start:m,pause:l}}var e="particleground",f=a.jQuery;a[e]=function(a,b){return new d(a,b)},a[e].defaults={minSpeedX:.1,maxSpeedX:.7,minSpeedY:.1,maxSpeedY:.7,directionX:"center",directionY:"center",density:1e4,dotColor:"#666666",lineColor:"#666666",particleRadius:7,lineWidth:1,curvedLines:!1,proximity:100,parallax:!0,parallaxMultiplier:5,onInit:function(){},onDestroy:function(){}},f&&(f.fn[e]=function(a){if("string"==typeof arguments[0]){var b,c=arguments[0],g=Array.prototype.slice.call(arguments,1);return this.each(function(){f.data(this,"plugin_"+e)&&"function"==typeof f.data(this,"plugin_"+e)[c]&&(b=f.data(this,"plugin_"+e)[c].apply(this,g))}),void 0!==b?b:this}return"object"!=typeof a&&a?void 0:this.each(function(){f.data(this,"plugin_"+e)||f.data(this,"plugin_"+e,new d(this,a))})})}(window,document);
+
+        // Function to show loading screen and redirect to Streamlit
+        function showLoadingScreen() {
+            // Show the loading screen
+            document.querySelector('.loading-screen').style.display = 'flex';
+            
+            // Get the URL from config
+            const streamlitUrl = config.streamlitUrl;
+            
+            console.log('Redirecting to:', streamlitUrl);
+            
+            // After a short delay, redirect to the Streamlit email page
+            setTimeout(function() {
+                window.location.href = streamlitUrl;
+            }, 2000); // 2 second delay to show the loading screen
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#top" class="logo">PEARE AI</a>
+            <div class="nav-links">
+                <a href="#contact" class="nav-button contact-nav">Contact</a>
+                <a href="#about" class="nav-button about-nav">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="top" class="hero">
+            <div class="gradient hero-gradient">
+                <img src="gradiant.png" alt="">
+            </div>
+            <h1>From Text to Video,<br>Your Vision in Action !</h1>
+            <button class="get-started" onclick="showLoadingScreen()">Get Started</button>
+        </section>
+
+        <!-- Loading Screen -->
+        <div class="loading-screen">
+            <div id="particles-background" class="vertical-centered-box"></div>
+            <div id="particles-foreground" class="vertical-centered-box"></div>
+
+            <div class="vertical-centered-box">
+                <div class="content">
+                    <div class="loader-circle"></div>
+                    <div class="loader-line-mask">
+                        <div class="loader-line"></div>
+                    </div>
+                    <img src="peare logo.png" alt="PEARE Logo" class="loading-logo">
+                </div>
+            </div>
+        </div>
+
+        <section class="video-previews">
+            <div class="preview-card card-left">
+                <img src="cat.png" alt="Cat image">
+            </div>
+            <div class="preview-card card-right">
+                <img src="sunset.png" alt="Sunset image">
+            </div>
+        </section>
+
+        <!-- Video Player Section -->
+        <section class="video-player">
+            <video controls class="main-video" loop>
+                <source src="sample.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="brand">
+            <img src="peareailogo.png" alt="PEARE AI Logo" class="brand-logo">
+        </section>
+
+        <section id="about" class="about">
+            <div class="gradient about-gradient">
+                <img src="gradiant.png" alt="">
+            </div>
+            <h2>ABOUT US</h2>
+            <div class="about-text">
+                <p>Peare AI is a cutting-edge web-based text-to-video generator that transforms written prompts into high-quality, AI-generated videos. Powered by Genmo Mochi and enhanced with custom AI-driven audio generation, Peare AI delivers a seamless, browser-accessible experience.</p>
+                <p>Users can enter text prompts, and the system will process them on the backend, leveraging both local processing and API integration for optimized performance. Designed for efficiency and accessibility, Peare AI brings cinematic AI video generation to creators, developers, and enthusiasts alike.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>CONTACT US</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <h3>College</h3>
+                        <p>Providence College of Engineering</p>
+                        <p>Kerala, India</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Made By</h3>
+                        <p>Students</p>
+                        <p>Semester: S6</p>
+                        <p>Branch: CSE Ai</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Get In Touch</h3>
+                        <p>Email: amithsahadevan234@gmail.com</p>
+                        <p>Phone: +91 9037292424</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Return to Top Button -->
+    <button id="returnToTop" class="return-to-top">
+        <span class="return-text">PEARE AI</span>
+    </button>
+
+    <script>
+        // Scroll effect for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const logo = document.querySelector('.logo');
+            const navLinks = document.querySelector('.nav-links');
+            const scrollThreshold = isMobile ? 30 : 50; // Lower threshold for mobile
+            const scrollRatio = Math.min(window.scrollY / scrollThreshold, 1);
+            
+            if (isMobile) {
+                // Mobile behavior - faster fade
+                if (window.scrollY > 30) {
+                    logo.style.opacity = Math.max(0, 1 - (window.scrollY - 30) / 20);
+                } else {
+                    logo.style.opacity = 1;
+                }
+            } else {
+                // Desktop behavior
+                if (window.scrollY > scrollThreshold) {
+                    header.classList.add('scrolled');
+                    logo.classList.add('scrolled');
+                    navLinks.classList.add('hidden');
+                } else {
+                    header.classList.remove('scrolled');
+                    logo.classList.remove('scrolled');
+                    navLinks.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Mouse movement tracking
+        let mouseX = 0;
+        let mouseY = 0;
+        let windowWidth = window.innerWidth;
+        let windowHeight = window.innerHeight;
+        let isMobile = windowWidth <= 768;
+
+        // Update mouse position
+        document.addEventListener('mousemove', (e) => {
+            if (!isMobile) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                updateGradients();
+            }
+        });
+
+        // Update window dimensions on resize
+        window.addEventListener('resize', () => {
+            windowWidth = window.innerWidth;
+            windowHeight = window.innerHeight;
+            isMobile = windowWidth <= 768;
+        });
+
+        function updateGradients() {
+            if (isMobile) return;
+
+            const heroGradient = document.querySelector('.hero-gradient');
+            const aboutGradient = document.querySelector('.about-gradient');
+            
+            if (heroGradient && parallaxElements.heroGradient.isVisible) {
+                const moveX = (mouseX - windowWidth / 2) * 0.15;
+                const moveY = (mouseY - windowHeight / 2) * 0.15;
+                const scrollY = window.scrollY;
+                const scrollOffset = -scrollY * 0.35;
+                
+                heroGradient.style.transform = `
+                    translate(${moveX}px, ${moveY + scrollOffset}px)
+                    scale(1.2)
+                `;
+            }
+            
+            if (aboutGradient && parallaxElements.aboutGradient.isVisible) {
+                const moveX = (mouseX - windowWidth / 2) * 0.15;
+                const moveY = (mouseY - windowHeight / 2) * 0.15;
+                const scrollY = window.scrollY;
+                const scrollOffset = -scrollY * 0.4;
+                
+                aboutGradient.style.transform = `
+                    rotate(180deg)
+                    translate(${moveX}px, ${moveY + scrollOffset}px)
+                    scale(1.2)
+                `;
+            }
+        }
+
+        // Parallax scroll effect with Intersection Observer
+        const parallaxElements = {
+            cards: { selector: '.preview-card', isVisible: false },
+            brand: { selector: '.brand-logo', isVisible: false },
+            about: { selector: '.about', isVisible: false },
+            heroGradient: { selector: '.hero-gradient', isVisible: false },
+            aboutGradient: { selector: '.about-gradient', isVisible: false },
+            videoPlayer: { selector: '.video-player', isVisible: false }
+        };
+
+        // Create observer for parallax elements
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const element = entry.target;
+                const type = element.dataset.parallaxType;
+                if (parallaxElements[type]) {
+                    parallaxElements[type].isVisible = entry.isIntersecting;
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Initialize elements and add data attributes
+        Object.entries(parallaxElements).forEach(([type, info]) => {
+            const elements = document.querySelectorAll(info.selector);
+            elements.forEach(element => {
+                element.dataset.parallaxType = type;
+                observer.observe(element);
+            });
+        });
+
+        // Handle scroll for parallax effect
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+
+            // Parallax for cards
+            if (parallaxElements.cards.isVisible) {
+                const cards = document.querySelectorAll('.preview-card');
+                cards.forEach((card, index) => {
+                    const verticalSpeed = index === 0 ? 0.3 : 0.2;
+                    const horizontalSpeed = index === 0 ? -0.2 : 0.2;
+                    const yOffset = -scrollY * verticalSpeed;
+                    const xOffset = scrollY * horizontalSpeed;
+                    const baseRotation = index === 0 ? -15 : 15;
+                    
+                    card.style.transform = `
+                        rotate(${baseRotation}deg)
+                        translate(${xOffset}px, ${yOffset}px)
+                    `;
+                });
+            }
+
+            // Parallax for brand logo
+            if (parallaxElements.brand.isVisible) {
+                const brandLogo = document.querySelector('.brand-logo');
+                const brandSpeed = 0.25;
+                brandLogo.style.transform = `translateY(${-scrollY * brandSpeed}px)`;
+            }
+
+            // Parallax for about section
+            if (parallaxElements.about.isVisible) {
+                const aboutSection = document.querySelector('.about');
+                const aboutSpeed = 0.15;
+                aboutSection.style.transform = `translateY(${-scrollY * aboutSpeed}px)`;
+            }
+
+            // Parallax for video player
+            if (parallaxElements.videoPlayer.isVisible) {
+                const videoPlayer = document.querySelector('.video-player');
+                const videoSpeed = 0.2;
+                videoPlayer.style.transform = `translateY(${-scrollY * videoSpeed}px)`;
+            }
+
+            // Update gradients on scroll
+            updateGradients();
+        });
+
+        // Return to Top Button
+        const returnToTop = document.getElementById('returnToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (isMobile && window.scrollY > 300) {
+                returnToTop.classList.add('visible');
+            } else {
+                returnToTop.classList.remove('visible');
+            }
+        });
+
+        returnToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particleground/1.1.0/particleground.min.js"></script>
+</body>
+</html>
